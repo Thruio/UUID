@@ -4,7 +4,7 @@ php: 5.3
 
 before_script :
   - hostname
-  - composer install
+  - composer update
 
 after_script:
   - CODECLIMATE_REPO_TOKEN="f7ac76691ae172e8bc7d110a38188016f816d365e1c41a092b5bd54890001574" vendor/bin/test-reporter --stdout > codeclimate.json
