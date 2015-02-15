@@ -26,7 +26,6 @@ class UUID {
       case '5':
       default:
         $version_byte = 0x5000;
-        break;
     }
 
     return sprintf('%08s-%04s-%04x-%04x-%12s',
