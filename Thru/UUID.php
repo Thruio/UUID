@@ -24,6 +24,7 @@ class UUID {
         $version_byte = 0x3000;
         break;
       case '5':
+      default:
         $version_byte = 0x5000;
         break;
     }
