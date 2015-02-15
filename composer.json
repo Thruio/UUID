@@ -7,9 +7,6 @@
       "email": "matthew@baggett.me"
     }
   ],
-  "require"    : {
-
-  },
   "require-dev": {
     "phpunit/phpunit": "*",
     "codeclimate/php-test-reporter": "dev-master"
