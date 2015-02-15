@@ -1,0 +1,22 @@
+{
+  "name"       : "thruio/uuid",
+  "description": "A nice little library to interact with UUIDs",
+  "authors"    : [
+    {
+      "name" : "Matthew Baggett",
+      "email": "matthew@baggett.me"
+    }
+  ],
+  "require"    : {
+
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*",
+    "codeclimate/php-test-reporter": "dev-master"
+  },
+  "autoload"   : {
+    "psr-0": {
+      "Thru\\": ""
+    }
+  }
+}
