@@ -10,7 +10,7 @@ after_script:
   - CODECLIMATE_REPO_TOKEN="f7ac76691ae172e8bc7d110a38188016f816d365e1c41a092b5bd54890001574" vendor/bin/test-reporter --stdout > codeclimate.json
   - "curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.1)' https://codeclimate.com/test_reports"
 
-script: phpunit --configuration phpunit.xml --coverage-text
+script: phpunit
 
 notifications:
   email:
