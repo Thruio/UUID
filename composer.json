@@ -1,5 +1,5 @@
 {
-  "name"       : "thruio/uuid",
+  "name"       : "thru.io/uuid",
   "description": "A nice little library to interact with UUIDs",
   "authors"    : [
     {
