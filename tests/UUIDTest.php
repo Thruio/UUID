@@ -10,28 +10,29 @@
  */
 
 use \Thru\UUID;
+
 class UUIDTest extends PHPUnit_Framework_TestCase
 {
     const uuid_format = "";
 
-    /**
+  /**
    * Tests UUID validation.
    *
    * @param string $uuid
    *   The uuid to check against.
-   * @param bool   $is_valid
+   * @param bool $is_valid
    *   Whether the uuid is valid or not.
    * @param string $message
    *   The message to display on failure.
    *
    * @dataProvider providerTestValidation
    */
-    public function testValidation($uuid, $is_valid, $message) 
+    public function testValidation($uuid, $is_valid, $message)
     {
         $this->assertSame($is_valid, Uuid::is_valid($uuid), $message);
     }
 
-    /**
+  /**
    * Dataprovider for UUID instance tests.
    *
    * @return array
@@ -40,7 +41,7 @@ class UUIDTest extends PHPUnit_Framework_TestCase
    *   - (bool) Whether or not the Uuid is valid.
    *   - Failure message.
    */
-    public function providerTestValidation() 
+    public function providerTestValidation()
     {
         return array(
         // These valid UUIDs.
