@@ -1,11 +1,11 @@
 <?php
-namespace Thru;
+namespace Thru\UUID;
 
 class UUID
 {
-    private static function with_namespace($namespace, $name, $crypto, $version)
+    private static function withNamespace($namespace, $name, $crypto, $version)
     {
-        if (!self::is_valid($namespace)) {
+        if (!self::isValid($namespace)) {
             return false;
         }
 
@@ -52,7 +52,7 @@ class UUID
 
     public static function v3($namespace, $name)
     {
-        return self::with_namespace($namespace, $name, 'md5', 3);
+        return self::withNamespace($namespace, $name, 'md5', 3);
     }
 
     public static function v4()
@@ -89,10 +89,10 @@ class UUID
 
     public static function v5($namespace, $name)
     {
-        return self::with_namespace($namespace, $name, 'sha1', 5);
+        return self::withNamespace($namespace, $name, 'sha1', 5);
     }
 
-    public static function is_valid($uuid)
+    public static function isValid($uuid)
     {
         return preg_match('/^\{?[0-9a-f]{8}\-?[0-9a-f]{4}\-?[0-9a-f]{4}\-?'.
         '[0-9a-f]{4}\-?[0-9a-f]{12}\}?$/i', $uuid) === 1;

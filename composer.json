@@ -15,9 +15,11 @@
     "codeclimate/php-test-reporter": "dev-master",
     "squizlabs/php_codesniffer": "*"
   },
-  "autoload"   : {
-    "psr-0": {
-      "Thru\\": ""
-    }
+
+  "autoload": {
+    "psr-4": {"Thru\\UUID\\": "src/"}
+  },
+  "autoload-dev": {
+    "psr-4": { "Thru\\UUID\\Tests\\": "tests/" }
   }
 }

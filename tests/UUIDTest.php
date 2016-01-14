@@ -1,19 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Baggett
- * Date: 09/02/2015
- * Time: 11:29
- *
- * Partially Borrowed from Drupal 8 UUID tests:
- * https://github.com/drupal/drupal/blob/8.0.x/core/tests/Drupal/Tests/Component/Uuid/UuidTest.php
- */
+namespace Thru\UUID\Tests;
 
-use \Thru\UUID;
+use Thru\UUID\UUID;
 
-class UUIDTest extends PHPUnit_Framework_TestCase
+class UUIDTest extends \PHPUnit_Framework_TestCase
 {
-    const uuid_format = "";
+    const UUID_FORMAT = "";
 
   /**
    * Tests UUID validation.
@@ -29,7 +21,7 @@ class UUIDTest extends PHPUnit_Framework_TestCase
    */
     public function testValidation($uuid, $is_valid, $message)
     {
-        $this->assertSame($is_valid, Uuid::is_valid($uuid), $message);
+        $this->assertSame($is_valid, UUID::isValid($uuid), $message);
     }
 
   /**
@@ -77,9 +69,9 @@ class UUIDTest extends PHPUnit_Framework_TestCase
     {
         $namespace = UUID::v4();
         $name = "test";
-        $this->assertTrue(UUID::is_valid(UUID::v3($namespace, $name)), 'UUID v3 generation works.');
-        $this->assertTrue(UUID::is_valid(UUID::v4()), 'UUID v4 generation works.');
-        $this->assertTrue(UUID::is_valid(UUID::v5($namespace, $name)), 'UUID v5 generation works.');
+        $this->assertTrue(UUID::isValid(UUID::v3($namespace, $name)), 'UUID v3 generation works.');
+        $this->assertTrue(UUID::isValid(UUID::v4()), 'UUID v4 generation works.');
+        $this->assertTrue(UUID::isValid(UUID::v5($namespace, $name)), 'UUID v5 generation works.');
     }
 
     public function testGeneratedUUIDNamespaces()
