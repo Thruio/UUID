@@ -17,9 +17,9 @@
   },
 
   "autoload": {
-    "psr-4": {"Thru\\UUID\\": "src/"}
+    "psr-4": {"Gone\\UUID\\": "src/"}
   },
   "autoload-dev": {
-    "psr-4": { "Thru\\UUID\\Tests\\": "tests/" }
+    "psr-4": { "Gone\\UUID\\Tests\\": "tests/" }
   }
 }
