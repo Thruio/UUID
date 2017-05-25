@@ -1,7 +1,7 @@
 <?php
-namespace Thru\UUID\Tests;
+namespace Gone\UUID\Tests;
 
-use Thru\UUID\UUID;
+use Gone\UUID\UUID;
 
 class UUIDTest extends \PHPUnit_Framework_TestCase
 {
