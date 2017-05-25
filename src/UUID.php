@@ -1,5 +1,5 @@
 <?php
-namespace Thru\UUID;
+namespace Gone\UUID;
 
 class UUID
 {
