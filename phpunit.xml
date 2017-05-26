@@ -4,21 +4,7 @@
          stopOnFailure="false">
     <testsuites>
         <testsuite name="main">
-            <file>tests/ExceptionTest.php</file>
-            <file>tests/PrettyPrinterTest.php</file>
-            <file>tests/UtilTest.php</file>
             <file>tests/UUIDTest.php</file>
-        </testsuite>
-        <testsuite name="objects">
-            <file>tests/ActiveRecordTest.php</file>
-            <file>tests/ActiveRecordExtendedTypesTest.php</file>
-            <file>tests/ActiveRecordExportTest.php</file>
-            <file>tests/SearchIndexTest.php</file>
-            <file>tests/SearchRecordsTest.php</file>
-        </testsuite>
-        <testsuite name="dblayer">
-            <file>tests/DatabaseLayerSelectTest.php</file>
-            <file>tests/SqlLayerTest.php</file>
         </testsuite>
     </testsuites>
     <logging>
@@ -29,7 +15,6 @@
         <blacklist>
             <directory>vendor</directory>
             <directory>tests</directory>
-            <directory>Thru/ActiveRecord/Test</directory>
         </blacklist>
     </filter>
 </phpunit>
