@@ -27,7 +27,7 @@ after_script:
 
 script: 
   - ./vendor/bin/phpcs --warning-severity=6 --standard=PSR2 src tests
-  - phpunit --configuration phpunit.xml --coverage-text
+  - vendor/bin/phpunit --configuration phpunit.xml --coverage-text
 
 notifications:
   email:
