@@ -1,7 +1,7 @@
 Gone/UUID
 ===========
 
-[![Build Status](https://travis-ci.org/Gone/UUID.svg?branch=master)](https://travis-ci.org/Gone/UUID) 
+[![Build Status](https://travis-ci.org/goneio/UUID.svg?branch=master)](https://travis-ci.org/goneio/UUID) 
 
 A nice little well-tested library for working with UUIDs.
 
