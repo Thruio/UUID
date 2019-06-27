@@ -55,7 +55,7 @@ class UUID
         return self::withNamespace($namespace, $name, 'md5', 3);
     }
 
-    public static function v4(int $seed = null)
+    public static function v4($seed = null)
     {
         if ($seed) {
             mt_srand($seed);
