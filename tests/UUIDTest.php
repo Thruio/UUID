@@ -6,33 +6,34 @@ use Gone\UUID\UUID;
 class UUIDTest extends \PHPUnit_Framework_TestCase
 {
     const UUID_FORMAT = "";
+    private $previousEntity;
 
-  /**
-   * Tests UUID validation.
-   *
-   * @param string $uuid
-   *   The uuid to check against.
-   * @param bool $is_valid
-   *   Whether the uuid is valid or not.
-   * @param string $message
-   *   The message to display on failure.
-   *
-   * @dataProvider providerTestValidation
-   */
+    /**
+     * Tests UUID validation.
+     *
+     * @param string $uuid
+     *   The uuid to check against.
+     * @param bool   $is_valid
+     *   Whether the uuid is valid or not.
+     * @param string $message
+     *   The message to display on failure.
+     *
+     * @dataProvider providerTestValidation
+     */
     public function testValidation($uuid, $is_valid, $message)
     {
         $this->assertSame($is_valid, UUID::isValid($uuid), $message);
     }
 
-  /**
-   * Dataprovider for UUID instance tests.
-   *
-   * @return array
-   *  An array of arrays containing
-   *   - The Uuid to check against.
-   *   - (bool) Whether or not the Uuid is valid.
-   *   - Failure message.
-   */
+    /**
+     * Dataprovider for UUID instance tests.
+     *
+     * @return array
+     *  An array of arrays containing
+     *   - The Uuid to check against.
+     *   - (bool) Whether or not the Uuid is valid.
+     *   - Failure message.
+     */
     public function providerTestValidation()
     {
         return array(
@@ -81,4 +82,53 @@ class UUIDTest extends \PHPUnit_Framework_TestCase
         $this->assertNotFalse(UUID::v3("00000000-0000-0000-0000-000000000000", "test"));
         $this->assertNotFalse(UUID::v5("00000000-0000-0000-0000-000000000000", "test"));
     }
+
+    public function testGeneratedSeededV4()
+    {
+        $this->assertEquals("0a8813a4-8f0e-44c2-b7bd-7b3fe71f2205", UUID::v4(19900601));
+        $this->assertEquals(UUID::v4(19900601), UUID::v4(19900601));
+        $this->assertNotEquals(UUID::v4(19900601), UUID::v4());
+    }
+
+    public function providerHashableEntities()
+    {
+        return array(
+        array("631b6d54-eed1-bed3-749f-422cebaed37b", "This is a fairly long string."),
+        array("b2337860-ead8-c843-35ca-35787d3fe605", "This is a different string."),
+        array("720d14db-d02f-1d79-adbf-e29e28a2ad72", ["This", "is", "an", "array"]),
+        array("ac2cbd34-ad0b-42e1-79c9-c6b64c4fe1e2", ["This", "is", "another", "array"]),
+        array("38a20287-3c5f-241b-f1ea-c41f6ba33e58", (object) ["And", "this", "is", "an", "object"]),
+        array("ddb001b1-85fb-df93-bbf3-a59a3ba48b9b", (object) ["And", "this", "is", "a", "different", "object"]),
+        array("ccd233bd-a0a2-203d-bb71-52366e7ec7be", (new Stringable())->setValue("Here are some words")),
+        array("aeeabe2b-9c9b-692e-aad9-7f036e7ec7be", (new Stringable())->setValue("Different set of words")),
+        );
+    }
+
+    /**
+     * @dataProvider providerHashableEntities
+     */
+    public function testHashedUUIDs($expectedUuid, $entity)
+    {
+        $this->assertTrue(UUID::isValid(UUID::v4_hash($entity)));
+        $this->assertEquals(UUID::v4_hash($entity), UUID::v4_hash($entity));
+        $this->assertNotEquals(UUID::v4_hash($this->previousEntity), UUID::v4_hash($entity));
+        $this->assertEquals($expectedUuid, UUID::v4_hash($entity));
+        $this->previousEntity = $entity;
+    }
+}
+
+
+class Stringable
+{
+	private $value;
+
+	public function setValue($value)
+	{
+		$this->value = $value;
+		return $this;
+	}
+	public function __toString()
+	{
+		return strtoupper($this->value);
+	}
 }

@@ -9,27 +9,27 @@ class UUID
             return false;
         }
 
-      // Get hexadecimal components of namespace
+        // Get hexadecimal components of namespace
         $nhex = str_replace(array('-','{','}'), '', $namespace);
 
-      // Binary Value
+        // Binary Value
         $nstr = '';
 
-      // Convert Namespace UUID to bits
+        // Convert Namespace UUID to bits
         for ($i = 0; $i < strlen($nhex); $i+=2) {
             $nstr .= chr(hexdec($nhex[$i].$nhex[$i+1]));
         }
 
-      // Calculate hash value
+        // Calculate hash value
         $hash = hash($crypto, $nstr . $name);
 
         switch ($version) {
-            case '3':
-                $version_byte = 0x3000;
-                break;
-            case '5':
-                $version_byte = 0x5000;
-                break;
+        case '3':
+            $version_byte = 0x3000;
+            break;
+        case '5':
+            $version_byte = 0x5000;
+            break;
         }
 
         return sprintf(
@@ -55,8 +55,11 @@ class UUID
         return self::withNamespace($namespace, $name, 'md5', 3);
     }
 
-    public static function v4()
+    public static function v4(int $seed = null)
     {
+        if($seed) {
+            mt_srand($seed);
+        }
         return sprintf(
             '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
             // 32 bits for "time_low"
@@ -87,6 +90,46 @@ class UUID
         );
     }
 
+    private static function v4_hash_string($string)
+    {
+        $elements = [];
+        if(strlen($string) > 4) {
+            $elements = str_split($string, ceil(strlen($string) / 4));
+            $elements = array_slice($elements, 0, 4);
+            array_walk(
+                $elements, function (&$element) {
+                    $element = crc32($element);
+                }
+            );
+            array_unshift($elements, "phoney");
+            unset($elements[0]);
+        }else{
+            $elements[1] = $string;
+            $elements[2] = $string;
+            $elements[3] = $string;
+            $elements[4] = $string;
+        }
+
+        return self::hexToUuid(self::integersToHex($elements));
+    }
+
+    public static function v4_hash($entity)
+    {
+        if(is_object($entity)) {
+            if(method_exists($entity, "__toString")) {
+                return self::v4_hash_string($entity->__toString());
+            }
+            return self::v4_hash_string(serialize($entity));
+        }
+        if(is_array($entity)) {
+            return self::v4_hash_string(serialize($entity));
+        }
+        if(empty($entity)) {
+            $entity = "";
+        }
+        return self::v4_hash_string($entity);
+    }
+
     public static function v5($namespace, $name)
     {
         return self::withNamespace($namespace, $name, 'sha1', 5);
@@ -94,7 +137,43 @@ class UUID
 
     public static function isValid($uuid)
     {
-        return preg_match('/^\{?[0-9a-f]{8}\-?[0-9a-f]{4}\-?[0-9a-f]{4}\-?'.
-        '[0-9a-f]{4}\-?[0-9a-f]{12}\}?$/i', $uuid) === 1;
+        return preg_match(
+            '/^\{?[0-9a-f]{8}\-?[0-9a-f]{4}\-?[0-9a-f]{4}\-?'.
+            '[0-9a-f]{4}\-?[0-9a-f]{12}\}?$/i', $uuid
+        ) === 1;
+    }
+
+    //private static function uuidToHex($uuid)
+    //{
+    //    return str_replace('-', '', $uuid);
+    //}
+
+    private static function hexToUuid($hex)
+    {
+        $regex = '/^([\da-f]{8})([\da-f]{4})([\da-f]{4})([\da-f]{4})([\da-f]{12})$/';
+        return preg_match($regex, $hex, $matches) ?
+        "{$matches[1]}-{$matches[2]}-{$matches[3]}-{$matches[4]}-{$matches[5]}" :
+        false;
+    }
+
+    /**
+     * Return array of 4x 32 bit ints
+     *
+     * @param  $hex
+     * @return array|false
+     */
+    //private static function hexToIntegers($hex) {
+    //    $bin = pack('h*', $hex);
+    //    return unpack('L*', $bin);
+    //}
+
+    private static function integersToHex(array $integers)
+    {
+        $args = $integers;
+        $args[0] = 'L*';
+        ksort($args);
+        $bin = call_user_func_array('pack', $args);
+        $results = unpack('h*', $bin);
+        return $results[1];
     }
 }
