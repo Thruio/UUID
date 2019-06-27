@@ -109,26 +109,10 @@ class UUIDTest extends \PHPUnit_Framework_TestCase
      */
     public function testHashedUUIDs($expectedUuid, $entity)
     {
-        $this->assertTrue(UUID::isValid(UUID::v4_hash($entity)));
-        $this->assertEquals(UUID::v4_hash($entity), UUID::v4_hash($entity));
-        $this->assertNotEquals(UUID::v4_hash($this->previousEntity), UUID::v4_hash($entity));
-        $this->assertEquals($expectedUuid, UUID::v4_hash($entity));
+        $this->assertTrue(UUID::isValid(UUID::v4Hash($entity)));
+        $this->assertEquals(UUID::v4Hash($entity), UUID::v4Hash($entity));
+        $this->assertNotEquals(UUID::v4Hash($this->previousEntity), UUID::v4Hash($entity));
+        $this->assertEquals($expectedUuid, UUID::v4Hash($entity));
         $this->previousEntity = $entity;
     }
-}
-
-
-class Stringable
-{
-	private $value;
-
-	public function setValue($value)
-	{
-		$this->value = $value;
-		return $this;
-	}
-	public function __toString()
-	{
-		return strtoupper($this->value);
-	}
 }

@@ -24,12 +24,12 @@ class UUID
         $hash = hash($crypto, $nstr . $name);
 
         switch ($version) {
-        case '3':
-            $version_byte = 0x3000;
-            break;
-        case '5':
-            $version_byte = 0x5000;
-            break;
+            case '3':
+                $version_byte = 0x3000;
+                break;
+            case '5':
+                $version_byte = 0x5000;
+                break;
         }
 
         return sprintf(
@@ -57,7 +57,7 @@ class UUID
 
     public static function v4(int $seed = null)
     {
-        if($seed) {
+        if ($seed) {
             mt_srand($seed);
         }
         return sprintf(
@@ -90,20 +90,21 @@ class UUID
         );
     }
 
-    private static function v4_hash_string($string)
+    private static function v4HashString($string)
     {
         $elements = [];
-        if(strlen($string) > 4) {
+        if (strlen($string) > 4) {
             $elements = str_split($string, ceil(strlen($string) / 4));
             $elements = array_slice($elements, 0, 4);
             array_walk(
-                $elements, function (&$element) {
+                $elements,
+                function (&$element) {
                     $element = crc32($element);
                 }
             );
             array_unshift($elements, "phoney");
             unset($elements[0]);
-        }else{
+        } else {
             $elements[1] = $string;
             $elements[2] = $string;
             $elements[3] = $string;
@@ -113,21 +114,21 @@ class UUID
         return self::hexToUuid(self::integersToHex($elements));
     }
 
-    public static function v4_hash($entity)
+    public static function v4Hash($entity)
     {
-        if(is_object($entity)) {
-            if(method_exists($entity, "__toString")) {
-                return self::v4_hash_string($entity->__toString());
+        if (is_object($entity)) {
+            if (method_exists($entity, "__toString")) {
+                return self::v4HashString($entity->__toString());
             }
-            return self::v4_hash_string(serialize($entity));
+            return self::v4HashString(serialize($entity));
         }
-        if(is_array($entity)) {
-            return self::v4_hash_string(serialize($entity));
+        if (is_array($entity)) {
+            return self::v4HashString(serialize($entity));
         }
-        if(empty($entity)) {
+        if (empty($entity)) {
             $entity = "";
         }
-        return self::v4_hash_string($entity);
+        return self::v4HashString($entity);
     }
 
     public static function v5($namespace, $name)
@@ -139,7 +140,8 @@ class UUID
     {
         return preg_match(
             '/^\{?[0-9a-f]{8}\-?[0-9a-f]{4}\-?[0-9a-f]{4}\-?'.
-            '[0-9a-f]{4}\-?[0-9a-f]{12}\}?$/i', $uuid
+            '[0-9a-f]{4}\-?[0-9a-f]{12}\}?$/i',
+            $uuid
         ) === 1;
     }
 
