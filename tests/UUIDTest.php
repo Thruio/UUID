@@ -94,10 +94,10 @@ class UUIDTest extends \PHPUnit_Framework_TestCase
         return array(
         array("631b6d54-eed1-bed3-749f-422cebaed37b", "This is a fairly long string."),
         array("b2337860-ead8-c843-35ca-35787d3fe605", "This is a different string."),
-        array("720d14db-d02f-1d79-adbf-e29e28a2ad72", ["This", "is", "an", "array"]),
-        array("ac2cbd34-ad0b-42e1-79c9-c6b64c4fe1e2", ["This", "is", "another", "array"]),
-        array("38a20287-3c5f-241b-f1ea-c41f6ba33e58", (object) ["And", "this", "is", "an", "object"]),
-        array("ddb001b1-85fb-df93-bbf3-a59a3ba48b9b", (object) ["And", "this", "is", "a", "different", "object"]),
+        array("720d14db-d02f-1d79-adbf-e29e28a2ad72", array("This", "is", "an", "array")),
+        array("ac2cbd34-ad0b-42e1-79c9-c6b64c4fe1e2", array("This", "is", "another", "array")),
+        array("38a20287-3c5f-241b-f1ea-c41f6ba33e58", (object) array("And", "this", "is", "an", "object")),
+        array("ddb001b1-85fb-df93-bbf3-a59a3ba48b9b", (object) array("And", "this", "is", "a", "different", "object")),
         array("ccd233bd-a0a2-203d-bb71-52366e7ec7be", (new Stringable())->setValue("Here are some words")),
         array("aeeabe2b-9c9b-692e-aad9-7f036e7ec7be", (new Stringable())->setValue("Different set of words")),
         );
