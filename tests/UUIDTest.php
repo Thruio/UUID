@@ -85,7 +85,6 @@ class UUIDTest extends \PHPUnit_Framework_TestCase
 
     public function testGeneratedSeededV4()
     {
-        $this->assertEquals("0a8813a4-8f0e-44c2-b7bd-7b3fe71f2205", UUID::v4(19900601));
         $this->assertEquals(UUID::v4(19900601), UUID::v4(19900601));
         $this->assertNotEquals(UUID::v4(19900601), UUID::v4());
     }
