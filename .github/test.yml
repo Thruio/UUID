@@ -1,0 +1,18 @@
+name: Test Pipeline
+on: [push, pull_request]
+jobs:
+  test:
+    name: Test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Composer Install
+        run: docker run -v $PWD/:/app gone/php:cli-7.4 /usr/local/bin/composer install
+      - name: PHP CS
+        run: vendor/bin/phpcs --warning-severity=6 --standard=PSR2 src tests
+      - name: PHP CS Fixer
+        run: vendor/bin/php-cs-fixer fix --dry-run
+      - name: PHPUnit
+        run: vendor/bin/phpunit
+      - name: PHPStan
+        run: vendor/bin/phpstan

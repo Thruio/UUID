@@ -7,16 +7,7 @@ includes:
   - vendor/slam/phpstan-extensions/conf/slam-rules.neon
 
 parameters:
-    level: 2
+    level: 6
     paths:
-        - bootstrap.php
-        - phinx.php
         - src/
-        - public/index.php
-        #- tests/
-        #- db/
-        #- vendor/benzine/core
-        #- vendor/benzine/orm
-    excludes_analyse:
-        - vendor/benzine/*/vendor
-        - vendor/benzine/orm/test/app
+        - tests/

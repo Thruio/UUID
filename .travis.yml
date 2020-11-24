@@ -19,8 +19,10 @@ after_script:
   - "curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.1)' https://codeclimate.com/test_reports"
 
 script: 
-  - ./vendor/bin/phpcs --warning-severity=6 --standard=PSR2 src tests
-  - vendor/bin/phpunit --configuration phpunit.xml --coverage-text
+  - vendor/bin/phpcs --warning-severity=6 --standard=PSR2 src tests
+  - vendor/bin/php-cs-fixer fix --dry-run
+  - vendor/bin/phpunit
+  - vendor/bin/phpstan
 
 notifications:
   email:
