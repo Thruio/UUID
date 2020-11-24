@@ -3,6 +3,8 @@ namespace Gone\UUID;
 
 class UUID
 {
+    public const LENGTH = 36;
+
     private static function withNamespace($namespace, $name, $crypto, $version)
     {
         if (!self::isValid($namespace)) {
@@ -138,6 +140,10 @@ class UUID
 
     public static function isValid($uuid)
     {
+        if(strlen($uuid) != self::LENGTH){
+            return false;
+        }
+
         return preg_match(
             '/^\{?[0-9a-f]{8}\-?[0-9a-f]{4}\-?[0-9a-f]{4}\-?'.
             '[0-9a-f]{4}\-?[0-9a-f]{12}\}?$/i',
