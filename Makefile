@@ -1,4 +1,7 @@
-all: php-cs-fixer php-cs phpstan phpunit
+all: composer php-cs-fixer php-cs phpstan phpunit
+
+composer:
+	composer install
 
 phpstan:
 	vendor/bin/phpstan analyse
