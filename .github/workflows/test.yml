@@ -1,5 +1,10 @@
 name: Test Pipeline
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+  schedule:
+    # Every Wednesday at 4am.
+    - cron: '0 4 * * 3'
 jobs:
   test-phpcs:
     name: PHPCs
