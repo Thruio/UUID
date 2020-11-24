@@ -1,0 +1,22 @@
+includes:
+  - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+  - vendor/phpstan/phpstan-symfony/extension.neon
+  - vendor/phpstan/phpstan-phpunit/extension.neon
+  - vendor/phpstan/phpstan-phpunit/rules.neon
+  - vendor/thecodingmachine/phpstan-strict-rules/phpstan-strict-rules.neon
+  - vendor/slam/phpstan-extensions/conf/slam-rules.neon
+
+parameters:
+    level: 2
+    paths:
+        - bootstrap.php
+        - phinx.php
+        - src/
+        - public/index.php
+        #- tests/
+        #- db/
+        #- vendor/benzine/core
+        #- vendor/benzine/orm
+    excludes_analyse:
+        - vendor/benzine/*/vendor
+        - vendor/benzine/orm/test/app
