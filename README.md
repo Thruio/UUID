@@ -3,7 +3,6 @@ Gone/UUID
 
 
 ![Test Pipeline](https://github.com/goneio/UUID/workflows/Tests/badge.svg)
-[![Build Status](https://travis-ci.org/goneio/UUID.svg?branch=master)](https://travis-ci.org/goneio/UUID) 
 
 A nice little well-tested library for working with UUIDs.
 
