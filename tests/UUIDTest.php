@@ -2,13 +2,13 @@
 
 namespace MatthewBaggett\UUID\Tests;
 
-use Gone\UUID\UUID;
-use Gone\UUID\UUIDGenerationException;
+use MatthewBaggett\UUID\UUID;
+use MatthewBaggett\UUID\UUIDGenerationException;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @covers   \Gone\UUID\UUID
+ * @covers   \MatthewBaggett\UUID\UUID
  */
 class UUIDTest extends TestCase
 {
