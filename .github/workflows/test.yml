@@ -1,48 +1,18 @@
-name: Tests
-on:
-  push:
-  pull_request:
-  schedule:
-    # Every Wednesday at 4am.
-    - cron: '0 4 * * 3'
+name: CI
+
+on: [push]
+
 jobs:
-  test-phpcs:
-    name: PHPCs
+  build-test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@master
-      - name: Composer Install
-        run: docker run -v $PWD/:/app gone/php:cli-7.4 /usr/local/bin/composer install
-      - name: PHP CS
-        run: vendor/bin/phpcs --warning-severity=6 --standard=PSR2 src tests
-  test-php-cs-fixer:
-    name: PHPCsFixer
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@master
-      - name: Composer Install
-        run: docker run -v $PWD/:/app gone/php:cli-7.4 /usr/local/bin/composer install
-      - name: PHP CS Fixer
-        run: vendor/bin/php-cs-fixer fix --dry-run
-  test-phpunit:
-    name: PHPUnit
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@master
-      - name: Composer Install
-        run: docker run -v $PWD/:/app gone/php:cli-7.4 /usr/local/bin/composer install
-      - name: PHPUnit
-        run: vendor/bin/phpunit
-  test-phpstan:
-    name: PHPStan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@master
-      - name: Composer Install
-        run: docker run -v $PWD/:/app gone/php:cli-7.4 /usr/local/bin/composer install
-      - name: PHPStan
-        run: vendor/bin/phpstan
+      - uses: actions/checkout@v2
+      - uses: php-actions/composer@v5
+        with:
+          php_version: 8.0
+      - uses: php-actions/phpunit@v2
+        with:
+          configuration: phpunit.xml.dist
+          php_version: 8.0
+          version: 9
