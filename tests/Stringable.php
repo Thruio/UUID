@@ -1,6 +1,6 @@
 <?php
 
-namespace Gone\UUID\Tests;
+namespace MatthewBaggett\UUID\Tests;
 
 class Stringable
 {

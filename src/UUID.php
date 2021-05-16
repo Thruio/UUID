@@ -1,6 +1,6 @@
 <?php
 
-namespace Gone\UUID;
+namespace MatthewBaggett\UUID;
 
 class UUID
 {

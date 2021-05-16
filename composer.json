@@ -1,5 +1,5 @@
 {
-  "name"       : "gone.io/uuid",
+  "name"       : "matthewbaggett/uuid",
   "description": "A nice little library to interact with UUIDs",
   "authors"    : [
     {
@@ -7,11 +7,14 @@
       "email": "matthew@baggett.me"
     }
   ],
+  "replace": {
+    "gone.io/uuid": "*"
+  },
   "config": {
     "sort-packages": true
   },
   "require"    : {
-    "php": "^7.4"
+    "php": "^7.0 || ^8.0"
   },
   "require-dev": {
     "codeclimate/php-test-reporter": "dev-master",
@@ -28,9 +31,9 @@
     "thecodingmachine/phpstan-strict-rules": "^0.12"
   },
   "autoload": {
-    "psr-4": {"Gone\\UUID\\": "src/"}
+    "psr-4": {"MatthewBaggett\\UUID\\": "src/"}
   },
   "autoload-dev": {
-    "psr-4": { "Gone\\UUID\\Tests\\": "tests/" }
+    "psr-4": { "MatthewBaggett\\UUID\\Tests\\": "tests/" }
   }
 }
